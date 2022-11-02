@@ -47,7 +47,38 @@ function Navbar() {
                         alert("coming soon");
                     }}>
                     <FlyText text={"AG STUDIO"} autoPlay={false} />
-                </div> </nav>
+                </div>
+                <a
+                    onClick={(event) => {
+                        event.preventDefault();
+                        alert("coming soon");
+                    }}>
+                    {/* <FlyIcon> */}
+                    <img className="logo" src={imgUrl + "/img/navbar/opensea.svg"} alt="opensea" />
+                    {/* </FlyIcon> */}
+                </a>
+                <a onClick={(event) => {
+                    event.preventDefault();
+                    alert("coming soon");
+                }}>
+                    {/* <FlyIcon> */}
+                    <img className="logo" src={imgUrl + "/img/navbar/instagram.svg"} alt="instagram" />
+                    {/* </FlyIcon> */}
+                </a>
+                <a
+                    href="https://discord.com/invite/tZDtDSPRF8"
+                    target="_blank"
+                >
+                    <img className="logo" src={imgUrl + "/img/navbar/twitter.svg"} alt="twitter" />
+                </a>
+                <a
+                    href="https://discord.com/invite/tZDtDSPRF8"
+                    target="_blank"
+                >
+                    <img className="logo" src={imgUrl + "/img/navbar/discord.svg"} alt="discord" />
+                </a>
+                <img className="logo" src={imgUrl + "/img/navbar/sound_off.gif"} alt="sound_off" id="mute_button" />
+            </nav>
         </>
     );
 }

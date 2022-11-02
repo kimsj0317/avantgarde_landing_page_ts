@@ -3,13 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import type TSwiper from "swiper";
 import styles from "./Gallery.module.scss";
-import {
-    motion,
-    useInView,
-    useMotionValue,
-    useSpring,
-    useTransform,
-} from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, useTransform, } from "framer-motion";
 import AnimationText from "./Animation"
 import { Keyboard, } from "swiper";
 
@@ -18,6 +12,12 @@ const imgUrl = process.env.PUBLIC_URL;
 function Gallery() {
     const [currentSlide, setSlide] = useState(0);
     const swiperRef = useRef<TSwiper | null>(null);
+    const currentGalleryItem = galleryItems[currentSlide];
+    const ratio = useSpring(currentGalleryItem.ratio);
+    const frameWidth = useTransform(
+        [ratio],
+        (ratio) => `calc(100% / ${ratio} + 10%)`
+    );
 
     return (
         <div
@@ -32,52 +32,56 @@ function Gallery() {
             </div>
             <div
                 style={{
+                    // width: frameWidth,
+                    position: "absolute",
                     textAlign: "center",
                     verticalAlign: "middle",
+                    height: "40rem",
+                    border: "1px solid #CE8BB4",
                 }}>
-                <Swiper
-                    slidesPerView={2}
-                    speed={800}
-                    onActiveIndexChange={(swiper) => {
-                        setSlide(swiper.activeIndex);
-                    }}
-                    slideToClickedSlide={true}
-                    centeredSlides={true}
-                    keyboard={{
-                        enabled: true,
-                    }}
-                    autoplay={false}
-                    modules={[Keyboard,]}
-                    style={{
-                        left: "0%",
-                        width: "100%",
-                        position: "absolute",
-                        overflow: "hidden",
-                        zIndex: "-1",
-                    }}>
-                    {galleryItems.map((item, index) => {
-                        return (
-                            <SwiperSlide key={item.imageUrl}>
-                                <GallerySlideItem
-                                    imageUrl={imgUrl + item.imageUrl}
-                                    highlight={currentSlide === index}
-                                    prev={currentSlide > index}
-                                    onClick={() => {
-                                        if (currentSlide + 1 === index) {
-                                            swiperRef.current?.slideNext();
-                                            return;
-                                        }
-                                        if (currentSlide - 1 === index) {
-                                            swiperRef.current?.slidePrev();
-                                            return;
-                                        }
-                                    }}
-                                />
-                            </SwiperSlide>
-                        );
-                    })}
-                </Swiper>
             </div>
+            <Swiper
+                slidesPerView={2}
+                speed={800}
+                onActiveIndexChange={(swiper) => {
+                    setSlide(swiper.activeIndex);
+                }}
+                slideToClickedSlide={true}
+                centeredSlides={true}
+                keyboard={{
+                    enabled: true,
+                }}
+                autoplay={false}
+                modules={[Keyboard,]}
+                style={{
+                    left: "0%",
+                    width: "100%",
+                    position: "absolute",
+                    overflow: "hidden",
+                    zIndex: "-1",
+                }}>
+                {galleryItems.map((item, index) => {
+                    return (
+                        <SwiperSlide key={item.imageUrl}>
+                            <GallerySlideItem
+                                imageUrl={imgUrl + item.imageUrl}
+                                highlight={currentSlide === index}
+                                prev={currentSlide > index}
+                                onClick={() => {
+                                    if (currentSlide + 1 === index) {
+                                        swiperRef.current?.slideNext();
+                                        return;
+                                    }
+                                    if (currentSlide - 1 === index) {
+                                        swiperRef.current?.slidePrev();
+                                        return;
+                                    }
+                                }}
+                            />
+                        </SwiperSlide>
+                    );
+                })}
+            </Swiper>
         </div>
     );
 }
