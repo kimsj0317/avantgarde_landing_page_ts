@@ -1,0 +1,29 @@
+@font-face {
+    font-family: RobotoCondensed-Bold;
+    src: url("../../public/font/RobotoCondensed-Bold.ttf");
+}
+
+.navbar {
+    z-index: 1;
+    background: linear-gradient(to bottom, #262626, rgba(0, 0, 0, 0));
+}
+
+.subtitle {
+    font-family: RobotoCondensed-Bold, sans-serif;
+    color: white;
+    font-size: 0.8rem;
+    margin-left: 2%;
+    top: 30%;
+    position: relative;
+    display: inline-block;
+}
+
+.logo {
+    margin-right: 2%;
+    right: 3%;
+    top: 30%;
+    position: relative;
+    width: 1.2%;
+    vertical-align: middle;
+    float: right;
+}
