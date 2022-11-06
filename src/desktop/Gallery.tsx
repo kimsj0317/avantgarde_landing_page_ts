@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import type TSwiper from "swiper";
@@ -6,6 +6,7 @@ import styles from "./Gallery.module.scss";
 import { motion, useInView, useMotionValue, useSpring, useTransform, } from "framer-motion";
 import AnimationText from "./Animation"
 import { Keyboard, } from "swiper";
+import SlideUpText from "./SlideupText";
 
 const imgUrl = process.env.PUBLIC_URL;
 
@@ -13,10 +14,15 @@ function Gallery() {
     const [currentSlide, setSlide] = useState(0);
     const swiperRef = useRef<TSwiper | null>(null);
     const currentGalleryItem = galleryItems[currentSlide];
+    const [previousRatio, setPreviousRatio] = useState(currentGalleryItem.ratio);
     const ratio = useSpring(currentGalleryItem.ratio);
+    if (currentGalleryItem.ratio !== previousRatio) {
+        ratio.set(currentGalleryItem.ratio);
+        setPreviousRatio(currentGalleryItem.ratio);
+    }
     const frameWidth = useTransform(
         [ratio],
-        (ratio) => `calc(100% / ${ratio} + 10%)`
+        (ratio) => `calc(670rem / ${ratio} + 40rem)`
     );
 
     return (
@@ -32,14 +38,42 @@ function Gallery() {
             </div>
             <div
                 style={{
-                    // width: frameWidth,
                     position: "absolute",
-                    textAlign: "center",
-                    verticalAlign: "middle",
+                }}>
+                <span
+                    style={{
+                        fontSize: "1.5rem",
+                        fontWeight: 700,
+                        fontStyle: "italic",
+                        color: "#fff",
+                    }}
+                >
+                    Ha Jung woo
+                </span>
+                <div style={{
+                    fontSize: "1.25rem",
+                    color: "#fff",
+                }}>
+                    {currentGalleryItem.description.map((text, index) => {
+                        return (
+                            <Fragment key={text}>
+                                {index !== 0 && <br />}
+                                <SlideUpText text={text} />
+                            </Fragment>
+                        );
+                    })}
+                </div>
+            </div>
+            {/* <motion.div
+                animate={{
+                    width: "",
+                }}
+                style={{
+                    // position: "absolute",
                     height: "40rem",
                     border: "1px solid #CE8BB4",
                 }}>
-            </div>
+            </motion.div> */}
             <Swiper
                 slidesPerView={2}
                 speed={800}
@@ -58,7 +92,7 @@ function Gallery() {
                     width: "100%",
                     position: "absolute",
                     overflow: "hidden",
-                    zIndex: "-1",
+                    zIndex: "0",
                 }}>
                 {galleryItems.map((item, index) => {
                     return (
@@ -82,6 +116,25 @@ function Gallery() {
                     );
                 })}
             </Swiper>
+            <div
+                style={{
+                    width: "70rem",
+                    height: "0.5rem",
+                    marginTop: "50rem",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    backgroundColor: `rgba(112,112,112, 0.5)`,
+                }}>
+                <div
+                    style={{
+                        width: `calc(70rem / ${galleryItems.length})`,
+                        height: "100%",
+                        backgroundColor: "#fff",
+                        transition: `transform 0.15s`,
+                        transform: `translateX(calc(70rem / ${galleryItems.length} * ${currentSlide}))`,
+                    }}
+                />
+            </div>
         </div>
     );
 }
