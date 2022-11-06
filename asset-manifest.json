@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/avantgarde_landing_page_ts/static/css/main.1819d2cc.css",
+    "main.js": "/avantgarde_landing_page_ts/static/js/main.9d9bbb6d.js",
+    "static/js/787.d39b8af3.chunk.js": "/avantgarde_landing_page_ts/static/js/787.d39b8af3.chunk.js",
+    "static/media/RobotoCondensed-BoldItalic.ttf": "/avantgarde_landing_page_ts/static/media/RobotoCondensed-BoldItalic.10efc48e1860233efcc9.ttf",
+    "static/media/RobotoCondensed-Italic.ttf": "/avantgarde_landing_page_ts/static/media/RobotoCondensed-Italic.7d70998915d35a40e9fb.ttf",
+    "static/media/RobotoCondensed-Regular.ttf": "/avantgarde_landing_page_ts/static/media/RobotoCondensed-Regular.fc3d2f2e3a203d0037c1.ttf",
+    "static/media/RobotoCondensed-Bold.ttf": "/avantgarde_landing_page_ts/static/media/RobotoCondensed-Bold.c5fe6deebafaec078e64.ttf",
+    "index.html": "/avantgarde_landing_page_ts/index.html",
+    "main.1819d2cc.css.map": "/avantgarde_landing_page_ts/static/css/main.1819d2cc.css.map",
+    "main.9d9bbb6d.js.map": "/avantgarde_landing_page_ts/static/js/main.9d9bbb6d.js.map",
+    "787.d39b8af3.chunk.js.map": "/avantgarde_landing_page_ts/static/js/787.d39b8af3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1819d2cc.css",
+    "static/js/main.9d9bbb6d.js"
+  ]
+}
